@@ -1,0 +1,110 @@
+[
+  {
+    "id": "TCK-1001",
+    "title": "Login page throws 500 error",
+    "description": "Users report a server error when submitting valid credentials on the login page.",
+    "customer": "Acme Corp",
+    "priority": "High",
+    "status": "Open",
+    "createdAt": "2026-02-18T09:14:00Z"
+  },
+  {
+    "id": "TCK-1002",
+    "title": "Password reset email not received",
+    "description": "Reset email is delayed or never delivered for some domains.",
+    "customer": "Globex",
+    "priority": "Medium",
+    "status": "In Progress",
+    "createdAt": "2026-02-19T11:02:00Z"
+  },
+  {
+    "id": "TCK-1003",
+    "title": "Dashboard loading slowly",
+    "description": "Main dashboard takes more than 12 seconds to render after login.",
+    "customer": "Initech",
+    "priority": "High",
+    "status": "Open",
+    "createdAt": "2026-02-20T07:45:00Z"
+  },
+  {
+    "id": "TCK-1004",
+    "title": "Export to CSV missing columns",
+    "description": "Downloaded CSV excludes custom fields selected in report settings.",
+    "customer": "Umbrella Inc",
+    "priority": "Medium",
+    "status": "Resolved",
+    "createdAt": "2026-02-20T15:30:00Z"
+  },
+  {
+    "id": "TCK-1005",
+    "title": "Mobile app crashes on startup",
+    "description": "iOS app crashes immediately after splash screen on version 5.2.1.",
+    "customer": "Soylent Co",
+    "priority": "Critical",
+    "status": "In Progress",
+    "createdAt": "2026-02-21T06:18:00Z"
+  },
+  {
+    "id": "TCK-1006",
+    "title": "Billing invoice PDF corrupted",
+    "description": "Generated invoice PDFs cannot be opened in Adobe Reader.",
+    "customer": "Wayne Enterprises",
+    "priority": "High",
+    "status": "Open",
+    "createdAt": "2026-02-22T10:51:00Z"
+  },
+  {
+    "id": "TCK-1007",
+    "title": "Two-factor authentication code invalid",
+    "description": "Users receive 'invalid code' despite entering OTP within 30 seconds.",
+    "customer": "Stark Industries",
+    "priority": "High",
+    "status": "Open",
+    "createdAt": "2026-02-23T13:20:00Z"
+  },
+  {
+    "id": "TCK-1008",
+    "title": "Notification settings not saving",
+    "description": "Changes to email and SMS preferences revert after page refresh.",
+    "customer": "Hooli",
+    "priority": "Low",
+    "status": "In Progress",
+    "createdAt": "2026-02-24T08:07:00Z"
+  },
+  {
+    "id": "TCK-1009",
+    "title": "Search returns duplicate results",
+    "description": "Global search displays repeated records for the same item.",
+    "customer": "Vehement Capital Partners",
+    "priority": "Medium",
+    "status": "Open",
+    "createdAt": "2026-02-25T14:40:00Z"
+  },
+  {
+    "id": "TCK-1010",
+    "title": "API rate limit headers missing",
+    "description": "Response headers do not include remaining quota and reset time values.",
+    "customer": "Massive Dynamic",
+    "priority": "Medium",
+    "status": "Resolved",
+    "createdAt": "2026-02-26T09:55:00Z"
+  },
+  {
+    "id": "TCK-1011",
+    "title": "File upload fails for >25MB",
+    "description": "Uploads over 25MB fail with timeout despite documented 50MB limit.",
+    "customer": "Wonka Industries",
+    "priority": "High",
+    "status": "In Progress",
+    "createdAt": "2026-02-27T12:11:00Z"
+  },
+  {
+    "id": "TCK-1012",
+    "title": "Role permissions not applied",
+    "description": "Newly assigned manager role cannot access team analytics page.",
+    "customer": "Pied Piper",
+    "priority": "Critical",
+    "status": "Open",
+    "createdAt": "2026-02-28T16:26:00Z"
+  }
+]
