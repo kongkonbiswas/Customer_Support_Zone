@@ -5,9 +5,9 @@ import TaskStatus from "../TaskStatus/TaskStatus";
 import ResolvedTask from "../ResolvedTask/ResolvedTask";
 import OutputBox from "../OutputBox/OutputBox";
 
-const CsTickets = ({ thePromise }) => {
+const CsTickets = ({ ticketData }) => {
   // Load async ticket data and keep local editable state.
-  const issuesData = use(thePromise);
+  const issuesData = use(ticketData);
   const [issues, setIssues] = useState(issuesData);
 
   // Open -> In-Progress

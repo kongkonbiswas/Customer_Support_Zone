@@ -37,7 +37,7 @@ function App() {
       <Container></Container>
       <Navbar></Navbar>
       <Suspense fallback={"Loading..."}>
-        <CsTickets thePromise={ticketData}></CsTickets>
+        <CsTickets ticketData={ticketData}></CsTickets>
       </Suspense>
       <Footer></Footer>
       <ToastContainer />
