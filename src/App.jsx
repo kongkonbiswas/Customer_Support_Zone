@@ -4,7 +4,7 @@ import "./App.css";
 import Container from "./Components/Container/Container";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Footer/Footer";
-import CsTickets from "./Components/CsTickets/Cstickets";
+import CsTickets from "./Components/CsTickets/CsTickets";
 
 const getData = async () => {
   try {

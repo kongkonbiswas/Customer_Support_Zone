@@ -3,80 +3,80 @@ import { CgProfile } from "react-icons/cg";
 import { toast } from "react-toastify";
 
 const TicketsCards = ({ issue, handleCardProgress }) => {
+  // Destructure issue fields for cleaner JSX.
   const { title, status, description, id, priority, customer, createdAt } =
     issue;
 
+  // Card click updates status in parent + shows a toast.
   const handleCard = (data) => {
     handleCardProgress(data);
     toast(`"${data.title}" is now In-Progress.`);
   };
 
+  // Priority badge text color helper.
   const getPriorityColor = (priority) => {
-    if (priority === "HIGH PRIORITY") {
-      return `text-red-600`;
-    } else if (priority === "MEDIUM PRIORITY") {
-      return `text-yellow-500`;
-    } else {
-      return `text-green-600`;
-    }
+    if (priority === "HIGH PRIORITY") return "text-red-600";
+    if (priority === "MEDIUM PRIORITY") return "text-amber-600";
+    return "text-green-600";
   };
 
   return (
-    <>
-      <div
-        onClick={() => handleCard(issue)}
-        className="h-full flex flex-col p-3 md:p-4 shadow-md rounded-xl bg-white border border-zinc-200 transition-all duration-500 ease-in-out
-        hover:-translate-y-[1px]
-        hover:ring-2 hover:ring-cyan-300/60 hover:ring-offset-2 hover:ring-offset-white
-        hover:shadow-[0_10px_25px_-10px_rgba(56,189,248,.35),0_12px_30px_-12px_rgba(16,185,129,.25)]
-        "
-      >
-        <div className="flex justify-between items-center">
-          <h2 className="font-semibold text-sm md:text-base">{title}</h2>
-          <p
-            className={`py-1 px-2 md:px-3 text-nowrap rounded-2xl text-sm flex items-center gap-1 ${
+    <div
+      onClick={() => handleCard(issue)}
+      className="h-full cursor-pointer select-none rounded-xl border border-zinc-200 bg-white p-3 shadow-md opacity-100 md:p-4"
+    >
+      <div className="flex items-center justify-between">
+        <h2 className="text-sm font-semibold text-slate-900 md:text-base">
+          {title}
+        </h2>
+
+        {/* Status badge */}
+        <p
+          className={`flex items-center gap-1 rounded-2xl px-2 py-1 text-sm text-slate-800 md:px-3 ${
+            status === "Open"
+              ? "bg-[#B9F8CF]"
+              : status === "In-Progress"
+                ? "bg-[#F8F3B9]"
+                : "bg-teal-100"
+          }`}
+        >
+          <span
+            className={`inline-block h-3 w-3 rounded-full md:h-4 md:w-4 ${
               status === "Open"
-                ? "bg-[#B9F8CF]"
+                ? "bg-[#02A53B]"
                 : status === "In-Progress"
-                  ? "bg-[#F8F3B9]"
-                  : "bg-teal-100"
+                  ? "bg-[#FEBB0C]"
+                  : "bg-teal-500"
             }`}
-          >
-            <span
-              className={`w-3 h-3 md:w-4 md:h-4 rounded-full inline-block ${
-                status === "Open"
-                  ? "bg-[#02A53B]"
-                  : status === "In-Progress"
-                    ? "bg-[#FEBB0C]"
-                    : "bg-teal-500"
-              }`}
-            ></span>
-            {status}
+          />
+          {status}
+        </p>
+      </div>
+
+      <p className="my-3 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-600">
+        {description}
+      </p>
+
+      <div className="mt-1.5 justify-between space-y-2 md:flex">
+        <div className="flex items-center justify-between gap-4 md:justify-baseline">
+          <p className="text-sm text-slate-500">#{id}</p>
+          <p className={`text-sm font-medium ${getPriorityColor(priority)}`}>
+            {priority}
           </p>
         </div>
-        <p className="text-sm text-[#627382] flex-1 my-3 line-clamp-3">
-          {description}
-        </p>
-        <div className="mt-1.5 space-y-2 md:flex justify-between">
-          <div className="flex items-center justify-between md:justify-baseline gap-4">
-            <p className="text-sm text-[#627382]">#{id}</p>
-            <p className={`text-sm  ${getPriorityColor(priority)}`}>
-              {priority}
-            </p>
+
+        <div className="flex justify-between md:justify-baseline">
+          <div className="mr-4 flex items-center gap-1">
+            <CgProfile size={18} className="text-slate-500" />
+            <p className="text-sm text-slate-500">{customer}</p>
           </div>
-          <div className="flex justify-between md:justify-baseline">
-            <div className="flex items-center gap-1">
-              <CgProfile color="#627382" size={18} />
-              <p className="text-sm text-[#627382] mr-4">{customer}</p>
-            </div>
-            <div className="flex">
-              <IoCalendar color="#627382" size={18} />
-              <span className="text-sm text-[#627382] ml-1">{createdAt}</span>
-            </div>
+          <div className="flex items-center">
+            <IoCalendar size={18} className="text-slate-500" />
+            <span className="ml-1 text-sm text-slate-500">{createdAt}</span>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

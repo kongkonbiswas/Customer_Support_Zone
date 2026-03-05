@@ -6,69 +6,67 @@ import ResolvedTask from "../ResolvedTask/ResolvedTask";
 import OutputBox from "../OutputBox/OutputBox";
 
 const CsTickets = ({ thePromise }) => {
-  // Read async data (React 19 `use`) and keep a local mutable copy.
+  // Load async ticket data and keep local editable state.
   const issuesData = use(thePromise);
   const [issues, setIssues] = useState(issuesData);
 
-  // Move ticket from Open -> In-Progress when card action is clicked.
+  // Open -> In-Progress
   const handleCardProgress = (clickData) => {
     if (clickData.status !== "Open") return;
-
-    const progressData = issues.map((issue) =>
-      issue.id === clickData.id
-        ? { ...issue, status: "In-Progress", statusChangedAt: new Date() }
-        : issue,
+    setIssues((prev) =>
+      prev.map((issue) =>
+        issue.id === clickData.id
+          ? { ...issue, status: "In-Progress", statusChangedAt: new Date() }
+          : issue,
+      ),
     );
-
-    setIssues(progressData);
   };
 
-  // Mark selected ticket as Resolved.
+  // In-Progress -> Resolved
   const completeData = (compData) => {
-    const resolvedData = issues.map((issue) =>
-      issue.id === compData.id ? { ...compData, status: "Resolved" } : issue,
+    setIssues((prev) =>
+      prev.map((issue) =>
+        issue.id === compData.id ? { ...compData, status: "Resolved" } : issue,
+      ),
     );
-
-    setIssues(resolvedData);
   };
 
-  // Remove a resolved ticket from the list.
+  // Remove resolved ticket
   const removeData = (data) => {
-    const otherData = issues.filter((ele) => ele.id !== data.id);
-    setIssues(otherData);
+    setIssues((prev) => prev.filter((ele) => ele.id !== data.id));
   };
 
   return (
     <Container>
-      {/* Top summary/output section */}
-      <OutputBox issues={issues} />
+      {/* Visibility guard: prevents inherited blur/opacity/filter from parents */}
+      <section className="relative isolate z-10 opacity-100 blur-0 brightness-100 saturate-100 text-slate-900">
+        <OutputBox issues={issues} />
 
-      <h1 className="mb-4 px-3 text-start text-xl font-semibold md:px-0 md:text-2xl">
-        Customer Tickets
-      </h1>
+        <h1 className="mb-4 px-3 text-start text-2xl font-extrabold tracking-tight text-slate-900 md:px-0">
+          Customer Tickets
+        </h1>
 
-      <div className="flex flex-col-reverse gap-6 md:flex-row">
-        {/* Left side: active (non-resolved) ticket cards */}
-        <div className="px-3 md:w-2/3 md:px-0">
-          <div className="grid gap-4 md:grid-cols-2">
-            {issues
-              .filter((issue) => issue.status !== "Resolved")
-              .map((issue) => (
-                <TicketsCards
-                  key={issue.id}
-                  issue={issue}
-                  handleCardProgress={handleCardProgress}
-                />
-              ))}
+        <div className="flex flex-col-reverse gap-6 md:flex-row">
+          <div className="px-3 md:w-2/3 md:px-0">
+            <div className="grid gap-4 md:grid-cols-2">
+              {issues
+                .filter((issue) => issue.status !== "Resolved")
+                .map((issue) => (
+                  <TicketsCards
+                    key={issue.id}
+                    issue={issue}
+                    handleCardProgress={handleCardProgress}
+                  />
+                ))}
+            </div>
+          </div>
+
+          <div className="px-3 md:w-1/3 md:px-0">
+            <TaskStatus issues={issues} completeData={completeData} />
+            <ResolvedTask issues={issues} removeData={removeData} />
           </div>
         </div>
-
-        {/* Right side: status controls + resolved list */}
-        <div className="px-3 md:w-1/3 md:px-0">
-          <TaskStatus issues={issues} completeData={completeData} />
-          <ResolvedTask issues={issues} removeData={removeData} />
-        </div>
-      </div>
+      </section>
     </Container>
   );
 };
